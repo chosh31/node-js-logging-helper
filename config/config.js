@@ -1,5 +1,5 @@
 const config = module.exports = {
-    mode: 'console',
+    mode: 'dev',
     kinesis: {
         enable: true,
         region: 'us-east-1',
