@@ -6,9 +6,8 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "chosh31",
-  "email": "sunghwancho2011@gmail.com",
-  "license": "ISC",
+  "author": "chosh31 <sunghwancho2011@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.381.0",
     "kinesis": "^1.2.2",
