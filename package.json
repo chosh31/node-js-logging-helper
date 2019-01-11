@@ -1,12 +1,13 @@
 {
   "name": "node-js-logging-helper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Logging Helper for Node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
+  "author": "chosh31",
+  "email": "sunghwancho2011@gmail.com",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.381.0",

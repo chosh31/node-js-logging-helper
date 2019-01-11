@@ -1,5 +1,10 @@
 # Logging Helper for Node.js
 
+### Packages
+```
+$ npm i --save-dev node-js-logging-helper
+```
+
 ### Configuration
 - `LogHelper`
     - `mode`
