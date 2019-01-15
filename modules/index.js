@@ -1,7 +1,4 @@
-const KinesisModule = require('./KinesisModule');
-const DevModule = require('./DevModule');
-
 module.exports = {
-    kinesis: KinesisModule,
-    dev: DevModule
+    kinesis: require('./KinesisModule'),
+    dev: require('./DevModule')
 }
