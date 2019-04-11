@@ -1,27 +1,46 @@
 const config = require('../config/config');
-// const sensor = `sensor-${Math.floor(Math.random() * 100000)}`;
 const kafka = require('kafka-node');
+const KafkaProducerPool = require('./KafkaProducerPool');
 const HighLevelProducer = kafka.HighLevelProducer;
+const producerPool = new KafkaProducerPool();
 
 module.exports = class KafkaModule {
     constructor(options) {
         this.options = options || config.kafka;
-        this._client = new kafka.KafkaClient(this.options.client);
-        this._admin = new kafka.Admin(this._client);
-        this._producer = new HighLevelProducer(this._client);
     }
 
-    writeRecord (record) {
+    getAdmin () {
+        if (this._admin === undefined) {
+            this._admin = new kafka.Admin(
+                new kafka.KafkaClient(this.options.client)
+            )
+        }
+        return this._admin;
+    }
+
+    getProducer () {
+        if (producerPool.getProducerPool().length === 0) {
+            producerPool.getProducerPool().push(
+                new HighLevelProducer(
+                    new kafka.KafkaClient(this.options.client)
+                )
+            );
+        }
+        return producerPool.getProducerPool().shift();
+    }
+
+    /**
+     * @method writeRecord
+     * @param {Array} records - `[{topic, messages}]`
+     */
+    writeRecord (records) {
         if (!this.options.enable) {
             return;
         }
+        this._producer = this.getProducer();
 
-        const payloads = [
-            { topic: 'test-helper-topic-repl-3-test3', messages: 'hi' },
-            { topic: 'test-helper-topic-repl-3-test3', messages: ['hello', 'world'] }
-        ];
-
-        this._producer.send(payloads, function (err, data) {
+        this._producer.send(records, (err, data) => {
+            producerPool.releaseProducer(this._producer);
             if (err) {
                 console.error(err);
                 return;
@@ -29,4 +48,4 @@ module.exports = class KafkaModule {
             console.log(data);
         });
     };
-}
+};

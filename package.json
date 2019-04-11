@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.381.0",
+    "kafka-node": "^4.0.4",
     "kinesis": "^1.2.2",
     "mocha": "^5.2.0"
   }
