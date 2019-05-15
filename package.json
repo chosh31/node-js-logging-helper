@@ -9,8 +9,8 @@
   "author": "chosh31 <sunghwancho2011@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.381.0",
-    "kafka-node": "^4.0.4",
+    "aws-sdk": "^2.455.0",
+    "kafka-node": "4.1.3",
     "kinesis": "^1.2.2",
     "mocha": "^5.2.0"
   }
